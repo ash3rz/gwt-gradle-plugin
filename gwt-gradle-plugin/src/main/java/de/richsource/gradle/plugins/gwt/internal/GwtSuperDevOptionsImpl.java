@@ -18,6 +18,7 @@ package de.richsource.gradle.plugins.gwt.internal;
 import java.io.File;
 
 import de.richsource.gradle.plugins.gwt.GwtSuperDevOptions;
+import de.richsource.gradle.plugins.gwt.Style;
 
 /**
  * Default implementation of {@link GwtSuperDevOptions}.
@@ -26,6 +27,7 @@ public class GwtSuperDevOptionsImpl implements GwtSuperDevOptions {
 	private File workDir;
 
 	private String bindAddress;
+	private Style style;
 	private Integer port;
 	private Boolean noPrecompile;
 	private Boolean useClasspathForSrc;
@@ -36,6 +38,16 @@ public class GwtSuperDevOptionsImpl implements GwtSuperDevOptions {
 	private File launcherDir;
 	// -X[no]closureFormattedOutput
 	private Boolean closureFormattedOutput;
+
+	@Override
+	public Style getStyle() {
+		return style;
+	}
+
+	@Override
+	public void setStyle(Style style) {
+		this.style = style;
+	}
 
 	/** {@inheritDoc} */
 	@Override

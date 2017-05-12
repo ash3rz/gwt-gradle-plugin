@@ -22,6 +22,16 @@ import java.io.File;
  */
 public interface GwtSuperDevOptions {
 
+
+	Style getStyle();
+
+	/**
+	 * Sets the "-style" option.
+	 *
+	 * @param style
+	 */
+	void setStyle(Style style);
+
 	/**
 	 * @see #setWorkDir(File)
 	 * 

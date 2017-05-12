@@ -15,13 +15,13 @@
  */
 package de.richsource.gradle.plugins.gwt;
 
-import java.io.File;
-import java.util.concurrent.Callable;
-
 import org.gradle.api.Task;
 import org.gradle.api.internal.ConventionMapping;
 import org.gradle.api.internal.IConventionAware;
 import org.gradle.api.specs.Spec;
+
+import java.io.File;
+import java.util.concurrent.Callable;
 
 import de.richsource.gradle.plugins.gwt.internal.GwtSuperDevOptionsImpl;
 
@@ -55,6 +55,7 @@ public class GwtSuperDev extends AbstractGwtActionTask implements GwtSuperDevOpt
 		dirArgIfSet("-workDir", getWorkDir());
 		argIfSet("-bindAddress", getBindAddress());
 		argIfSet("-port", getPort());
+		argIfSet("-style", getStyle());
 		argIfEnabled(getNoPrecompile(), "-noprecompile");
 		argOnOff(getAllowMissingSrc(), "-allowMissingSrc", "-noallowMissingSrc");
 		argOnOff(getFailOnError(), "-failOnError", "-nofailOnError");
@@ -70,6 +71,12 @@ public class GwtSuperDev extends AbstractGwtActionTask implements GwtSuperDevOpt
 			@Override
 			public String call() throws Exception {
 				return options.getBindAddress();
+			}
+		});
+		conventionMapping.map("style", new Callable<Style>() {
+			@Override
+			public Style call() throws Exception {
+				return options.getStyle();
 			}
 		});
 		conventionMapping.map("port", new Callable<Integer>() {
@@ -126,6 +133,16 @@ public class GwtSuperDev extends AbstractGwtActionTask implements GwtSuperDevOpt
 	@Override
 	protected boolean prependSrcToClasspath() {
 		return Boolean.TRUE.equals(getUseClasspathForSrc());
+	}
+
+	@Override
+	public Style getStyle() {
+		return options.getStyle();
+	}
+
+	@Override
+	public void setStyle(Style style) {
+		options.setStyle(style);
 	}
 
 	/** {@inheritDoc} */
